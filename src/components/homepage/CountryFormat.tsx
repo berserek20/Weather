@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function CountryFormat({country,city,timezone,lon,lat}) {
+function CountryFormat({country,city,timezone,lon,lat}:{country:string,city:string,timezone:string,lon:number,lat:number}) {
   const navigate = useNavigate();
   return (
       

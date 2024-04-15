@@ -95,8 +95,8 @@ function Homepage() {
                 country={value.cou_name_en}
                 timezone={value.timezone}
                 city={value.name}
-                lon={value.coordinates?.lat}
-                lat={value.coordinates?.lat}
+                lon={value.coordinates?.lat??0}
+                lat={value.coordinates?.lat??0}
               />
             )) ?? null}
           </tbody>

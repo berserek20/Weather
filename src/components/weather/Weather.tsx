@@ -4,10 +4,10 @@ import { WeatherResponseType } from "./type";
 function Weather() {
   const { lon, lat } = useParams();
   const [weatherData, setWeatherData] = useState<WeatherResponseType>();
-  const ApiKey = "d93665fc493f5ac61cf6858e318c6913";
-  console.log(weatherData);
 
   useEffect(() => {
+    const ApiKey=import.meta.env.VITE_ApiKey;
+    console.log(ApiKey)
     async function ApiCall() {
       const link = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${ApiKey}`;
       try {

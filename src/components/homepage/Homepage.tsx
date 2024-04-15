@@ -60,6 +60,7 @@ function Homepage() {
         setScrollReachedToEndOfList(true);
       }
     });
+      // eslint-disable-next-line
   },[order,colName]);
  
 
@@ -69,6 +70,7 @@ function Homepage() {
       setScrollReachedToEndOfList(false);
       ApiCall();
     }
+    // eslint-disable-next-line
   }, [scrollReachedToEndOfList]); //boolean
   return (
     <div className="flex flex-col justify-center">

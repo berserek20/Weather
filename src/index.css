@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box; /* Ensure all elements include padding and border in their total width and height */
+    margin: 0;
+    padding: 0;
+    font-family: inherit; /* Use the parent element's font family */
+    font-size: 100%; /* Set default font size to be 16px (or whatever the browser default is) */
+    line-height: 1.5; /* Set default line height for better text readability */
+    list-style: none; /* Remove default list styles */
+    text-decoration: none; /* Remove default text decoration (e.g., underline) */
+    outline: none; /* Remove outline on focus for better accessibility */
+    border: none; /* Remove default border styles */
+    background: transparent; /* Set default background to transparent */
+    color: inherit; /* Use the parent element's text color */
+    vertical-align: baseline; /* Align inline elements to the baseline */
+}
+
+/* Optionally, you can include additional resets based on your project's needs */

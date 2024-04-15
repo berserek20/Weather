@@ -3,15 +3,13 @@ import { CountryResponseResultType, CountryResponseType } from "./type";
 import CountryFormat from "./CountryFormat";
 import Search from "./Search";
 import Sort from "./Sort";
-import Filter from "./Filter";
+
 function Homepage() {
   const [locationData, setLocationData] = useState<CountryResponseResultType[]>(
     []
   );
   const [offset, setOffset] = useState(0);
-  // const [link, setLink] = useState(
-  //   `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?limit=10&offset=${offset}`
-  // );
+
   const [scrollReachedToEndOfList, setScrollReachedToEndOfList] = useState(false);
   const [order,setOrder]=useState('ASC')
   const [colName,setColName]=useState('cou_name_en')
@@ -21,6 +19,7 @@ function Homepage() {
   console.log(locationData);
 
   async function ApiCall() {
+    
     const link=`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?order_by=${colName}%20${order}&limit=20&offset=${offset}`
 
     try {
@@ -32,7 +31,6 @@ function Homepage() {
         
         setOffset((prev) => prev + 10);
 
-        // console.log(locationData);
       } else {
         console.log("couldn't find Data");
       }
@@ -42,9 +40,10 @@ function Homepage() {
   }
 
   useEffect(() => {
+    console.log(order,colName,"api called")
     ApiCall();
     
-    window.addEventListener("scroll", (e) => {
+    window.addEventListener("scroll", () => {
       var body = document.body,
         html = document.documentElement;
 
@@ -62,9 +61,11 @@ function Homepage() {
       }
     });
   },[order,colName]);
+ 
 
   useEffect(() => {
     if (scrollReachedToEndOfList) {
+
       setScrollReachedToEndOfList(false);
       ApiCall();
     }
@@ -76,7 +77,7 @@ function Homepage() {
         <Search setLocationData={setLocationData} />
       </div>
       <b className=" text-3xl">CountryFormat</b>
-      <div className=" text-2xl md: text-xl">
+      <div className=" text-2xl md:text-xl">
         <table className=" size-full overflow-y-auto">
           <thead className=" bg-purple-600 sticky top-0">
             <tr>

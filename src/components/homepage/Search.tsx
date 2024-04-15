@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react";
-import {  CountryResponseResultType, CountryResponseType } from "./type";
+import React, { useEffect, useState } from "react";
+import { CountryResponseResultType, CountryResponseType } from "./type";
 
-function Search({setLocationData}) {
+function Search({setLocationData}:{
+  setLocationData: React.Dispatch<React.SetStateAction<CountryResponseResultType[]>>
+}) {
   const [inputCity, setInputCity] = useState("");
   const [filterData, setFilterData] = useState<CountryResponseResultType[]>([]);
   console.log(filterData,"city");
 
-  async function ApiCall() {
-    // console.log(inputCity, "a");
-    const link = `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?where=search('${inputCity}')&limit=98`;
-    try {
-      const countryData = await fetch(link);
-      const response: CountryResponseType = await countryData.json();
-
-      if (response) {
-        setFilterData(response.results);
-      } else {
-        console.log("couldn't find Data");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
   useEffect(() => {
+    async function ApiCall() {
+      const link = `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/geonames-all-cities-with-a-population-1000/records?where=search('${inputCity}')&limit=98`;
+      try {
+        const countryData = await fetch(link);
+        const response: CountryResponseType = await countryData.json();
+  
+        if (response) {
+          setFilterData(response.results);
+        } else {
+          console.log("couldn't find Data");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
     ApiCall();
   }, [inputCity]);
 
-  function enterValue(val) {
-    setInputCity(val.target.value);
+  function enterValue(val:string) {
+    setInputCity(val);
     console.log(inputCity,"a");
   }
 
@@ -39,11 +40,11 @@ function Search({setLocationData}) {
       <input
         type="text"
         placeholder="place name"
-        onChange={(val) => enterValue(val)}
+        onChange={(e) => enterValue(e.target.value)}
         style={{ border: "2px solid black" }}
         value={inputCity}
       />
-            <button className=" bg-purple-400 text-white hover:bg-purple-600" onClick={()=>{setLocationData([]);console.log("hello");setLocationData(filterData)}}>Filter</button>
+            <button className=" bg-purple-400 text-white hover:bg-purple-600" onClick={()=>{console.log("hello");setLocationData([...filterData])}}>Filter</button>
 
       </div>
       <select
